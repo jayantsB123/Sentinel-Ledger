@@ -21,6 +21,10 @@ ext {
 	set('springCloudVersion', "2025.1.2")
 }
 
+springBoot {
+	mainClass.set('com.jayant.payment.Sentinel_Ledger.SentinelLedgerApplication')
+}
+
 dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-actuator'
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
