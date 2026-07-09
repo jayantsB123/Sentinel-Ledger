@@ -1,5 +1,6 @@
 package com.jayant.payment.Sentinel_Ledger.controller;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.jayant.payment.Sentinel_Ledger.model.dtos.request.TransactionPaymentRequestDTO;
 import com.jayant.payment.Sentinel_Ledger.model.dtos.response.TransactionPaymentResponseDTO;
 import com.jayant.payment.Sentinel_Ledger.service.PaymentService;
@@ -21,7 +22,7 @@ public class PaymentController {
     @PostMapping
     public ResponseEntity<TransactionPaymentResponseDTO> processPayment(
             @RequestHeader("Idempotency-Key") String idempotencyKey,
-            @Valid @RequestBody TransactionPaymentRequestDTO request) {
+            @Valid @RequestBody TransactionPaymentRequestDTO request) throws JsonProcessingException {
 
         TransactionPaymentResponseDTO response = paymentService.processPayment(idempotencyKey, request);
         return ResponseEntity.status(HttpStatus.CREATED).body(response);
