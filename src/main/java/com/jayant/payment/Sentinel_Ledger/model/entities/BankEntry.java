@@ -33,6 +33,11 @@ public class BankEntry {
     @JoinColumn(name = "transaction_id", nullable = false)
     private BankTransaction transaction;
 
-    @Column(name = "created_at", updatable = false)
+    @Column(name = "created_at", nullable = false, updatable = false)
     private Instant createdAt;
+
+    @PrePersist
+    private void onCreate() {
+        this.createdAt = Instant.now();
+    }
 }

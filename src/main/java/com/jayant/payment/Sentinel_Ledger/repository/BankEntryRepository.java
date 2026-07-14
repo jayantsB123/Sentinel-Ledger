@@ -16,6 +16,6 @@ public interface BankEntryRepository extends JpaRepository<BankEntry, UUID> {
     List<BankEntry> findByAccountIdOrderByCreatedAtDesc(UUID accountId);
 
     @Query("SELECT COALESCE(SUM(CASE WHEN e.type = 'DEBIT' THEN -e.amount ELSE e.amount END), 0) " +
-            "FROM Entry e WHERE e.transaction.id = :transactionId")
+            "FROM BankEntry e WHERE e.transaction.id = :transactionId")
     BigDecimal sumNetAmountByTransaction(@Param("transactionId") UUID transactionId);
 }
