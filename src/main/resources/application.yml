@@ -26,6 +26,12 @@ spring:
 server:
   port: 8080
 
+rate-limit:
+  enabled: true
+  capacity: 10
+  refill-tokens: 10
+  refill-period-seconds: 60
+
 management:
   endpoints:
     web:
