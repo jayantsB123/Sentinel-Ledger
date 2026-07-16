@@ -48,6 +48,11 @@ public class GlobalExceptionHandler {
         return build(HttpStatus.INTERNAL_SERVER_ERROR, "INTERNAL_ERROR", "Something went wrong. Please try again.");
     }
 
+    @ExceptionHandler(RateLimitExceededException.class)
+    public ResponseEntity<PaymentErrorResponseDTO> handleRateLimitExceeded(RateLimitExceededException ex) {
+        return build(HttpStatus.TOO_MANY_REQUESTS, "RATE_LIMIT_EXCEEDED", ex.getMessage());
+    }
+
     private ResponseEntity<PaymentErrorResponseDTO> build(HttpStatus status, String code, String message) {
         return ResponseEntity.status(status)
                 .body(new PaymentErrorResponseDTO(code, message, Instant.now()));
